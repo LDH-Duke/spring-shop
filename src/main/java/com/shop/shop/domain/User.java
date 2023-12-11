@@ -5,9 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import org.springframework.stereotype.Component;
 
-@Component
+
+
 @Entity
 public class User {
 

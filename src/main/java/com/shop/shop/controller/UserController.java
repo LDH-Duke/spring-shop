@@ -1,18 +1,19 @@
 package com.shop.shop.controller;
 
+import com.shop.shop.domain.ResEntity;
 import com.shop.shop.domain.User;
+import com.shop.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class UserController {
 
     @Autowired
-    private User user;
+    private UserService userService;
 
 
     @GetMapping("/shop/signin")
@@ -27,5 +28,23 @@ public class UserController {
 
 
         return "";
+    }
+
+    @GetMapping("/shop/signup")
+    public String signUp(){
+
+        return "";
+    }
+
+    @PostMapping(value = "/shop/signup", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResEntity signUp(@RequestBody User user){
+
+        if (userService.join(user) == 200){
+            return new ResEntity(true, "회원가입 성공");
+        }else{
+            return new ResEntity(false, "회원가입 실패");
+        }
+
+
     }
 }
