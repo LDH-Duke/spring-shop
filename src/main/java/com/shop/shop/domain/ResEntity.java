@@ -1,15 +1,15 @@
 package com.shop.shop.domain;
 
 public class ResEntity {
-    private boolean status;
+    private int status;
     private String message;
 
-    public ResEntity(boolean status, String message) {
+    public ResEntity(int status, String message) {
         this.status = status;
         this.message = message;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
