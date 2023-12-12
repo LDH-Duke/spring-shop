@@ -2,8 +2,10 @@ package com.shop.shop.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 
+@Data
 @AllArgsConstructor
 @Builder
 public class ResDto<T> {
@@ -18,6 +20,7 @@ public class ResDto<T> {
         this.message = message;
         this.data = null;
     }
+
 
     public static<T> ResDto<T> res(final int code, final HttpStatus statusCode, final String resultMsg) {
         return res(code, statusCode, resultMsg, null);
