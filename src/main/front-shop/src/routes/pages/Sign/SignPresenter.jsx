@@ -12,9 +12,11 @@ export const SignPresenter = (
     }
 ) => {
 
-    const signin = async (e) => {
-        await handleSignIn
+    const siginin = (e) =>{
+        handleSignIn();
     }
+
+
 
     return (
         <>
@@ -38,9 +40,9 @@ export const SignPresenter = (
                                         <InputLabel>Password</InputLabel>
                                         <InputField type='password' onChange={(e) => onChangePw(e.target.value)} />
                                     </InputContainer>
-                                    <Button type='submit' onClick={signin}>Sign in</Button>
+                                    <Button type='submit'>Sign in</Button>
                                 </form>
-
+                                <p onClick={siginin}>aaaa</p>
                             </div>
                         </div>
                     </div>

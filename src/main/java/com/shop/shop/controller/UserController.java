@@ -27,15 +27,15 @@ public class UserController {
     /**
      * 로그인 (GET)
      */
-    @GetMapping("/shop/signin")
-    public String signIn(){
-        return "signIn";
-    }
+//    @GetMapping("/shop/signin")
+//    public String signIn(){
+//        return "signIn";
+//    }
 
     /**
      * 로그인 (POST)
      */
-    @PostMapping(value = "/shop/signin", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/api/v1/signin", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResDto> signIn(@RequestBody User user, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
         int result = userService.login(user);
 

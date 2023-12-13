@@ -1,0 +1,2 @@
+*{margin:0;padding:0}:root{--backgroundMain-color:#155de9;--mainFont-color:#fff;--subFont-color:#c489a2}.sign-container{background-color:var(--backgroundMain-color);color:var(--mainFont-color);display:flex;height:100vh;justify-content:center;width:100%}.sign-container .sign-box{display:flex;flex-direction:column;position:absolute;top:30%;width:30%}.sign-container .signin-title{font-size:1.8rem;font-weight:700;margin:20px 0}
+/*# sourceMappingURL=main.d2d84414.css.map*/
