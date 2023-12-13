@@ -39,6 +39,8 @@ public class UserController {
     public ResponseEntity<ResDto> signIn(@RequestBody User user, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
         int result = userService.login(user);
 
+        System.out.println(user.getAccount());
+
         if( result == 400){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(ResDto.builder()
