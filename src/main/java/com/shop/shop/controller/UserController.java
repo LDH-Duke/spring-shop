@@ -1,5 +1,6 @@
 package com.shop.shop.controller;
 
+
 import com.shop.shop.domain.ResDto;
 import com.shop.shop.domain.ResEntity;
 import com.shop.shop.domain.User;
@@ -8,6 +9,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jdk.swing.interop.SwingInterOpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,8 +17,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Member;
+import java.net.URLDecoder;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class UserController {
 
@@ -35,28 +40,32 @@ public class UserController {
     /**
      * ID 중복조회 (GET)
      */
-    @GetMapping(value = "/api/v1/user", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResDto> idCheck(@RequestBody User user,
+    @RequestMapping(value = "/api/v1/user", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResDto> idCheck(@RequestParam(name = "account") String account,
                                           HttpServletRequest httpServletRequest,
-                                          HttpServletResponse httpServletResponse){
+                                          HttpServletResponse httpServletResponse) throws UnsupportedEncodingException {
 
-        int result = userService.duplicationUser(user);
+        System.out.println(account);
+        Object data = URLDecoder.decode(account,"UTF-8");
+        System.out.println(data.toString());
 
-        if(result == 0){
-            return ResponseEntity.ok(ResDto.builder()
-                    .code(409)
-                    .statusCode(HttpStatus.BAD_REQUEST)
-                    .message("아이디 중복")
-                    .data(user.getAccount())
-                    .build()
-            );
-        }
+//        int result = userService.duplicationUser(user);
 
+//        if(result == 0){
+//            return ResponseEntity.ok(ResDto.builder()
+//                    .code(409)
+//                    .statusCode(HttpStatus.BAD_REQUEST)
+//                    .message("아이디 중복")
+//                    .data(user.getAccount())
+//                    .build()
+//            );
+//        }
+//
         return ResponseEntity.ok(ResDto.builder()
                 .code(200)
                 .statusCode(HttpStatus.OK)
                 .message("중복 없음")
-                .data(user.getAccount())
+                .data(account)
                 .build()
         );
     }

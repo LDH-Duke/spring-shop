@@ -6,22 +6,25 @@ import './SignUp.css'
 export const SignUpPresenter = (
     {
         isId,
+        isPw,
         isEmail,
 
         onChangeId,
         onChangePw,
+        onChangePw2,
         onChangeName,
         onChangePhone,
         onChangeEmail,
 
-        handleSignIn,
+        handleSignUp,
         handleIdCheck,
+        handlePwCheck,
         handleEmailCheck,
     }
 ) => {
 
-    const siginup = (e) => {
-        handleSignIn();
+    const signup = (e) => {
+        handleSignUp();
     }
 
 
@@ -56,7 +59,19 @@ export const SignUpPresenter = (
                         </InputContainer>
                         <InputContainer direction="column">
                             <InputLabel>Password</InputLabel>
-                            <InputField type='password' onChange={(e) => onChangePw(e.target.value)} />
+                            <InputField type='password' onChange={(e) => onChangePw(e.target.value)} onBlur={handlePwCheck}/>
+                        </InputContainer>
+                        <InputContainer direction="column">
+                            <InputLabel>Password Check</InputLabel>
+                            <InputField type='password' onChange={(e) => onChangePw2(e.target.value)} onBlur={handlePwCheck}/>
+                            {
+                                isPw ?
+                                    null
+                                    :
+                                    <div className='msg'>
+                                        <span>비밀번호가 일치하지 않습니다.</span>
+                                    </div>
+                            }
                         </InputContainer>
                         <InputContainer direction="column">
                             <InputLabel>Name</InputLabel>
@@ -78,7 +93,7 @@ export const SignUpPresenter = (
                                     </div>
                             }
                         </InputContainer>
-                        <Button as={'a'} href='/shop/signup'>Sign up</Button>
+                        <Button type='button' onClick={signup}>Sign up</Button>
                     </form>
                 </div>
             </div>

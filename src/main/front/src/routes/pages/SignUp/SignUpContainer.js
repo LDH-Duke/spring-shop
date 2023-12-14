@@ -7,11 +7,13 @@ import axios from 'axios';
 const SignUpContainer = () => {
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
+    const [pwCheck, setPwCheck] =useState("");
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
     const [isEmail, setIsEmail] = useState(1);
     const [isId, setIsId] = useState(1);
+    const [isPw, setIsPw] = useState(1);
 
     //email 정규식
     const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
@@ -33,7 +35,7 @@ const SignUpContainer = () => {
 
         console.log(data)
 
-        const result = await userApi.IdCheck(data, headers)
+        const result = await userApi.IdCheck(encodeURI(data), headers)
 
         console.log(result)
 
@@ -42,9 +44,22 @@ const SignUpContainer = () => {
 
     //pw 입력 시 state 변경
     const handlePwChange = (pw) => {
-        console.log(pw)
         setPw(pw)
     }
+    const handlePw2Change = (pw) => {
+        setPwCheck(pw)
+    }
+    //pw 일치
+    const handlePwCheck = () =>{
+        if(pw != pwCheck){
+            setIsPw(0)
+            return ;
+        }
+
+        setIsPw(1);
+    }
+
+
     //이름 입력 시 state 변경
     const handleNameChange = (name) => {
         setName(name)
@@ -69,7 +84,7 @@ const SignUpContainer = () => {
         setIsEmail(1)
     }
 
-    const handleSignIn = async () => {
+    const handleSignUp = async () => {
         const headers = {
             'Content-Type': 'application/json',
         }
@@ -90,15 +105,18 @@ const SignUpContainer = () => {
         <SignUpPresenter
             isId={isId}
             isEmail={isEmail}
+            isPw={isPw}
 
             onChangeId={handleIdChange}
             onChangePw={handlePwChange}
+            onChangePw2={handlePw2Change}
             onChangeName={handleNameChange}
             onChangePhone={handlePhoneChange}
             onChangeEmail={handleEmailChange}
 
-            handleSignIn={handleSignIn}
+            handleSignUp={handleSignUp}
             handleIdCheck={handleIdCheck}
+            handlePwCheck={handlePwCheck}
             handleEmailCheck={handleEmailCheck} />
     )
 }

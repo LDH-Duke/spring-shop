@@ -1,4 +1,5 @@
 import axios from "axios";
+import qs from "qs";
 
 const userApi = {
     /**
@@ -27,8 +28,12 @@ const userApi = {
         try {
             console.log('here')
             await axios.post("http://localhost:8080/api/v1/signup",
-                data,
-                headers
+                null,
+                {
+                    headers:{headers},
+                    params:{data},
+                    
+                }
             )
         } catch (error) {
             console.log(error)
@@ -40,12 +45,14 @@ const userApi = {
      * 아이디 중복확인
      */
 
-    IdCheck: async (data, headers) => {
+    IdCheck: async (account, headers) => {
         try {
             const result = await axios.get(
                 "http://localhost:8080/api/v1/user",
-                data,
-                headers
+                {
+                    params:{account},
+                    
+                }
             )
             return result.data
         } catch (error) {
