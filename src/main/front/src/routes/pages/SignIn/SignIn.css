@@ -1,0 +1,27 @@
+@import url(../../../Common.css);
+
+.signin-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: var(--backgroundMain-color);
+    color: var(--mainFont-color);
+}
+
+.signin-container .sign-box {
+    position: absolute;
+    top: 30%;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+.signin-container .signin-title {
+    margin: 20px 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+
+}
+
+.signin-container .siginin-form {}

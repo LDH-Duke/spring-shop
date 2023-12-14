@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -27,11 +29,14 @@ public class UserService {
         //중복 검사
         User result = userRepository.findByAccount(user.getAccount());
 
-        if(user.getPw().equals(result.getPw())){
-           return 200;
-        }else{
-            return 400;
+        if(result ==null){
+            return 404; //사용자가 전송한 아이디가 존재하지 않음
         }
+        if(!user.getPw().equals(result.getPw())){
+            return 400; //비밀번호 틀림
+        }
+
+        return 200;
     }
 
 
@@ -55,9 +60,10 @@ public class UserService {
      * @param user
      * @return
      */
-    private int duplicationUser(User user){
+    public int duplicationUser(User user){
+        System.out.println(user.getAccount());
         User result = userRepository.findByAccount(user.getAccount());
-        System.out.println(result.getAccount());
+        System.out.println(result.getPw());
         if(result.getAccount().equals( user.getAccount())){
             System.out.println("아이디 중복");
             return 0;

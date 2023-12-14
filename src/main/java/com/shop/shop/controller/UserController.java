@@ -24,13 +24,42 @@ public class UserController {
     private UserService userService;
 
 
-    /**
-     * 로그인 (GET)
-     */
+//    /**
+//     * 로그인 (GET)
+//     */
 //    @GetMapping("/shop/signin")
 //    public String signIn(){
-//        return "signIn";
+//        return "index";
 //    }
+
+    /**
+     * ID 중복조회 (GET)
+     */
+    @GetMapping(value = "/api/v1/user", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResDto> idCheck(@RequestBody User user,
+                                          HttpServletRequest httpServletRequest,
+                                          HttpServletResponse httpServletResponse){
+
+        int result = userService.duplicationUser(user);
+
+        if(result == 0){
+            return ResponseEntity.ok(ResDto.builder()
+                    .code(409)
+                    .statusCode(HttpStatus.BAD_REQUEST)
+                    .message("아이디 중복")
+                    .data(user.getAccount())
+                    .build()
+            );
+        }
+
+        return ResponseEntity.ok(ResDto.builder()
+                .code(200)
+                .statusCode(HttpStatus.OK)
+                .message("중복 없음")
+                .data(user.getAccount())
+                .build()
+        );
+    }
 
     /**
      * 로그인 (POST)
@@ -42,13 +71,25 @@ public class UserController {
         System.out.println(user.getAccount());
 
         if( result == 400){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(ResDto.builder()
-                            .code(400)
-                            .statusCode(HttpStatus.INTERNAL_SERVER_ERROR)
-                            .message("로그인 실패")
-                            .build()
-                    );
+            System.out.println("비밀번호틀림");
+            return ResponseEntity.ok(ResDto.builder()
+                    .code(400)
+                    .statusCode(HttpStatus.BAD_REQUEST)
+                    .message("비밀번호 오류")
+                    .data(user.getAccount())
+                    .build()
+            );
+        }
+
+        if( result == 404){
+            System.out.println("아이디없음");
+            return ResponseEntity.ok(ResDto.builder()
+                    .code(404)
+                    .statusCode(HttpStatus.BAD_REQUEST)
+                    .message("존재하지 않는 아이디")
+                    .data(user.getAccount())
+                    .build()
+            );
         }
 
         //로그인 성공
@@ -65,6 +106,7 @@ public class UserController {
         cookie.setPath("/");
         httpServletResponse.addCookie(cookie);
 
+        System.out.println("성공");
         return ResponseEntity.ok(ResDto.builder()
                 .code(200)
                 .statusCode(HttpStatus.OK)

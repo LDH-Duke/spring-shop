@@ -33,7 +33,7 @@ dependencies {
 }
 
 
-def frontendDir = "$projectDir/src/main/front-shop"
+def frontendDir = "$projectDir/src/main/front"
 
 sourceSets {
 	main {
