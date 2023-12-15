@@ -63,14 +63,14 @@ public class UserService {
     public int duplicationUser(User user){
         System.out.println(user.getAccount());
         User result = userRepository.findByAccount(user.getAccount());
-        System.out.println(result.getPw());
-        if(result.getAccount().equals( user.getAccount())){
-            System.out.println("아이디 중복");
-            return 0;
+
+        if(result == null){
+            System.out.println("아이디 중복 없음");
+            return 1;
         }
 
-        System.out.println("중복 없음");
-        return 1;
+        System.out.println("중복");
+        return 0;
 
     }
 

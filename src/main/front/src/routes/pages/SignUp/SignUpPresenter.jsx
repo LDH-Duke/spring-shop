@@ -49,21 +49,21 @@ export const SignUpPresenter = (
 
                             {
                                 isId ?
+                                    null
+                                    :
                                     <div className='msg'>
                                         <span>존재하는 아이디입니다.</span>
                                     </div>
-                                    :
-                                    null
                             }
 
                         </InputContainer>
                         <InputContainer direction="column">
                             <InputLabel>Password</InputLabel>
-                            <InputField type='password' onChange={(e) => onChangePw(e.target.value)} onBlur={handlePwCheck}/>
+                            <InputField type='password' onChange={(e) => onChangePw(e.target.value)} onBlur={handlePwCheck} />
                         </InputContainer>
                         <InputContainer direction="column">
                             <InputLabel>Password Check</InputLabel>
-                            <InputField type='password' onChange={(e) => onChangePw2(e.target.value)} onBlur={handlePwCheck}/>
+                            <InputField type='password' onChange={(e) => onChangePw2(e.target.value)} onBlur={handlePwCheck} />
                             {
                                 isPw ?
                                     null

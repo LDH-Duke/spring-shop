@@ -27,14 +27,12 @@ const userApi = {
     SignUp: async (data, headers) => {
         try {
             console.log('here')
-            await axios.post("http://localhost:8080/api/v1/signup",
-                null,
-                {
-                    headers:{headers},
-                    params:{data},
-                    
-                }
+            const result = await axios.post("http://localhost:8080/api/v1/signup",
+                data,
+                headers
             )
+
+            return result.data
         } catch (error) {
             console.log(error)
         }
@@ -47,12 +45,9 @@ const userApi = {
 
     IdCheck: async (account, headers) => {
         try {
-            const result = await axios.get(
+            const result = await axios.post(
                 "http://localhost:8080/api/v1/user",
-                {
-                    params:{account},
-                    
-                }
+                account
             )
             return result.data
         } catch (error) {

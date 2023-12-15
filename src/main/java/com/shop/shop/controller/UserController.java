@@ -1,15 +1,15 @@
 package com.shop.shop.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.shop.shop.domain.ResDto;
-import com.shop.shop.domain.ResEntity;
+
 import com.shop.shop.domain.User;
 import com.shop.shop.service.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jdk.swing.interop.SwingInterOpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,8 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Member;
 import java.net.URLDecoder;
+
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -40,32 +40,34 @@ public class UserController {
     /**
      * ID 중복조회 (GET)
      */
-    @RequestMapping(value = "/api/v1/user", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResDto> idCheck(@RequestParam(name = "account") String account,
+    @PostMapping(value = "/api/v1/user", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResDto> idCheck(@RequestBody User user,
                                           HttpServletRequest httpServletRequest,
-                                          HttpServletResponse httpServletResponse) throws UnsupportedEncodingException {
+                                          HttpServletResponse httpServletResponse) throws UnsupportedEncodingException, JsonProcessingException {
 
-        System.out.println(account);
-        Object data = URLDecoder.decode(account,"UTF-8");
-        System.out.println(data.toString());
+        System.out.println(user.getAccount());
+//        Object data = URLDecoder.decode(account, "UTF_8");
+//        System.out.println(data);
 
-//        int result = userService.duplicationUser(user);
 
-//        if(result == 0){
-//            return ResponseEntity.ok(ResDto.builder()
-//                    .code(409)
-//                    .statusCode(HttpStatus.BAD_REQUEST)
-//                    .message("아이디 중복")
-//                    .data(user.getAccount())
-//                    .build()
-//            );
-//        }
-//
+
+        int result = userService.duplicationUser(user);
+
+        if(result == 0){
+            return ResponseEntity.ok(ResDto.builder()
+                    .code(409)
+                    .statusCode(HttpStatus.BAD_REQUEST)
+                    .message("아이디 중복")
+                    .data(user.getAccount())
+                    .build()
+            );
+        }
+
         return ResponseEntity.ok(ResDto.builder()
                 .code(200)
                 .statusCode(HttpStatus.OK)
                 .message("중복 없음")
-                .data(account)
+                .data(user.getAccount())
                 .build()
         );
     }
@@ -169,7 +171,7 @@ public class UserController {
     /**
      * 회원가입 (POST)
      */
-    @PostMapping(value = "/shop/signup", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/api/v1/signup", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResDto> signUp(@RequestBody User user){
 
         int result = userService.join(user);
@@ -179,11 +181,11 @@ public class UserController {
         //실패
 
         if ( result == 409){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(ResDto.builder()
-                            .code(409)
-                            .statusCode(HttpStatus.INTERNAL_SERVER_ERROR)
-                            .message("회원가입 실패")
+            return ResponseEntity.ok(ResDto.builder()
+                            .code(404)
+                            .statusCode(HttpStatus.BAD_REQUEST)
+                            .message("불가")
+                            .data(user.getAccount())
                             .build()
                     );
         }

@@ -2,25 +2,27 @@ import React, { useRef, useState } from 'react'
 import { SignUpPresenter } from './SignUpPresenter.jsx'
 import userApi from '../../../api/user/user.js';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const SignUpContainer = () => {
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
-    const [pwCheck, setPwCheck] =useState("");
+    const [pwCheck, setPwCheck] = useState("");
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
     const [isEmail, setIsEmail] = useState(1);
-    const [isId, setIsId] = useState(1);
+    const [isId, setIsId] = useState(0);
     const [isPw, setIsPw] = useState(1);
+
+    const navigate = useNavigate();
 
     //email 정규식
     const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
 
     //id 입력 시 state 변경
     const handleIdChange = (id) => {
-        console.log(id)
         setId(id)
     }
 
@@ -32,14 +34,15 @@ const SignUpContainer = () => {
         const data = {
             'account': id,
         }
-
         console.log(data)
+        // const result = await userApi.IdCheck(encodeURI(data), headers)
+        const result = await userApi.IdCheck(data, headers)
 
-        const result = await userApi.IdCheck(encodeURI(data), headers)
-
-        console.log(result)
-
-
+        if (result.code == 409) {
+            setIsId(0)
+        } else if (result.code == 200) {
+            setIsId(1)
+        }
     }
 
     //pw 입력 시 state 변경
@@ -50,10 +53,10 @@ const SignUpContainer = () => {
         setPwCheck(pw)
     }
     //pw 일치
-    const handlePwCheck = () =>{
-        if(pw != pwCheck){
+    const handlePwCheck = () => {
+        if (pw != pwCheck) {
             setIsPw(0)
-            return ;
+            return;
         }
 
         setIsPw(1);
@@ -85,6 +88,11 @@ const SignUpContainer = () => {
     }
 
     const handleSignUp = async () => {
+
+        if (isId + isPw + isEmail != 3) {
+            alert("오류")
+            return;
+        }
         const headers = {
             'Content-Type': 'application/json',
         }
@@ -97,7 +105,10 @@ const SignUpContainer = () => {
             'email': email,
         }
 
-        const result = userApi.SignUp(data, headers)
+
+        const result = await userApi.SignUp(data, headers)
+        console.log(result)
+        navigate('/main')
 
     }
 
