@@ -25,3 +25,8 @@
 }
 
 .signin-container .siginin-form {}
+
+.signin-container .msg {
+    color: red;
+    margin: 5px 0;
+}

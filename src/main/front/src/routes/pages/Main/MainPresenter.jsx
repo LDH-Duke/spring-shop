@@ -1,13 +1,20 @@
-import React from 'react'
-import { InputContainer, InputField, InputLabel } from '../../../components/Input'
+import React, { useState } from 'react'
+import './Main.css'
+import { DotContainer, Dot } from '../../../components/Dot'
+
 
 export const MainPresenter = () => {
+
+
     return (
-        <div className='main'>
-            <InputContainer>
-                <InputLabel>이름</InputLabel>
-                <InputField type="text" />
-            </InputContainer>
+        <div className='main-container'>
+            <div className='dot'>
+                <DotContainer>
+                    <Dot/>
+                    <Dot/>
+                    <Dot/>
+                </DotContainer>
+            </div>
         </div>
     )
 }

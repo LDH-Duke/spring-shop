@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Main, SignIn, SignUp } from './pages'
-
+import {MousePointer} from '../components/MousePointer'
 
 const Router = () => {
+    const [xy, setXY] =useState({
+        x : 0,
+        y : 0
+    })
+
+    const moveMouse = (e) => {
+        setXY({x : e.pageX, y : e.pageY})
+    }
+
     return (
-        <div>
+        <div onMouseMove={(e)=>moveMouse(e)}>
+            <MousePointer x={xy.x} y={xy.y}/>
             <Routes>
                 <Route path='/shop' element={<Main />} />
                 <Route path='/shop/signin' element={<SignIn />} />

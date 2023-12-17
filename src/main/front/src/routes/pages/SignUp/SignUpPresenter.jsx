@@ -24,7 +24,17 @@ export const SignUpPresenter = (
 ) => {
 
     const signup = (e) => {
+
+        if(isId == 0 || isPw == 0 || isEmail == 0){
+            console.log("입력 값 오류");
+            return 0;
+        }
         handleSignUp();
+    }
+
+    const activeButton = () => {
+        
+        
     }
 
 

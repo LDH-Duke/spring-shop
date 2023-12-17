@@ -1,0 +1,15 @@
+@import url(../../../Common.css);
+
+.main-container {
+    height: 100vh;
+    background-color: var(--backgroundMain-color);
+}
+
+.main-container .dot{
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+    display: inline-block;
+    width: 40px;
+    
+}

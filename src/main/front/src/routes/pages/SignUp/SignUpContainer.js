@@ -13,8 +13,9 @@ const SignUpContainer = () => {
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
     const [isEmail, setIsEmail] = useState(1);
-    const [isId, setIsId] = useState(0);
+    const [isId, setIsId] = useState(1);
     const [isPw, setIsPw] = useState(1);
+    const [isCheck, setIsCheck] = useState(0);
 
     const navigate = useNavigate();
 
@@ -43,6 +44,7 @@ const SignUpContainer = () => {
         } else if (result.code == 200) {
             setIsId(1)
         }
+        setIsCheck(1)
     }
 
     //pw 입력 시 state 변경
@@ -89,10 +91,11 @@ const SignUpContainer = () => {
 
     const handleSignUp = async () => {
 
-        if (isId + isPw + isEmail != 3) {
-            alert("오류")
-            return;
+        if(!(id && pw && name && phone && email && isCheck)){
+            console.log("빈값 존재")
+            return 0;
         }
+
         const headers = {
             'Content-Type': 'application/json',
         }
@@ -108,7 +111,7 @@ const SignUpContainer = () => {
 
         const result = await userApi.SignUp(data, headers)
         console.log(result)
-        navigate('/main')
+        navigate('/shop/signin')
 
     }
 

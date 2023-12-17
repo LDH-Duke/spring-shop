@@ -8,6 +8,9 @@ import { useNavigate } from 'react-router-dom';
 const SignInContainer = () => {
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
+    const [err, setErr] = useState(1);
+
+
     const navigate = useNavigate();
 
 
@@ -24,25 +27,31 @@ const SignInContainer = () => {
         }
         const data = {
             'account': id,
-            'pw': pw // 괴도키드
+            'pw': pw
         }
         const result = await userApi.Login(data, headers);
 
         console.log(result)
 
-        if (result === 400) {
-            return console.log("비밀번호 에러")
+        if (result.code === 400) {
+            console.log("비밀번호 에러")
+            setErr(0)
+            return 0;
         }
-        if (result === 404) {
-            return console.log("존재하지 않는 아이디")
+        if (result.code === 404) {
+            console.log("존재하지 않는 아이디")
+            setErr(0)
+            return 0;
         }
+        return navigate("/shop")
+        
 
-        return navigate("/main")
+        
 
     }
 
     return (
-        <SignInPresenter onChangeId={handleIdChange} onChangePw={handlePwChange} handleSignIn={handleSignIn} />
+        <SignInPresenter err={err} onChangeId={handleIdChange} onChangePw={handlePwChange} handleSignIn={handleSignIn} />
     )
 }
 
