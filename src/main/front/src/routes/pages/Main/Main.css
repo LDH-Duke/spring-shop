@@ -16,6 +16,7 @@
     right: 0;
     overflow-y: scroll;
     -ms-overflow-style: none;
+    
 }
 
 .main-container .main-view::-webkit-scrollbar {

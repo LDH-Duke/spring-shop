@@ -14,7 +14,7 @@ export const ListContainer = styled.ul`
 `
 
 export const ListItem = styled(CardContainer)`
-    border: 1px solid black;
+    /* border: 1px solid black; */
 `
 
 export const ListImg = styled.img`

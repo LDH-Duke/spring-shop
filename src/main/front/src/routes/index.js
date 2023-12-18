@@ -18,6 +18,7 @@ const Router = () => {
             <MousePointer x={xy.x} y={xy.y} />
             <Routes>
                 <Route path='/shop' element={<Main mouse={xy} />} />
+                <Route path='/item/detail/:id'/>
                 <Route path='/shop/signin' element={<SignIn />} />
                 <Route path='/shop/signup' element={<SignUp />} />
             </Routes>

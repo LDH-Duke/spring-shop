@@ -10,7 +10,7 @@ export const CardContainer = styled.div`
     /* background-color: pink; */
     padding: 5px;
     box-shadow: 5px 5px 20px #3d3d3d;
-    transition: all.5s;
+    /* transition: all.2s; */
     background-image: url(${(props) => props.img || ''});
     background-size: contain;
     
