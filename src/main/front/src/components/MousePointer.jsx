@@ -8,5 +8,6 @@ export const MousePointer = styled.div`
     height: 25px;
     top: -15px;
     left: -15px;
+    z-index: 1;
     transform: translate( ${(props) => props.x || 0}px, ${(props) => props.y || 0}px) ;
 `

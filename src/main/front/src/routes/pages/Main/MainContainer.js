@@ -2,9 +2,9 @@ import React from 'react'
 import { MainPresenter } from './MainPresenter'
 
 
-const MainContainer = () => {
+const MainContainer = ({ mouse }) => {
     return (
-        <MainPresenter />
+        <MainPresenter mouse={mouse} />
     )
 }
 
