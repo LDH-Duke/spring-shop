@@ -28,7 +28,7 @@ export const ListContainer = styled.ul`
 
 export const ListItem = styled(CardContainer)`
     width: 100%;
-    height: 85%;
+    height: 84.5%;
 `
 
 export const ItemLabel = styled(CardInfo)`

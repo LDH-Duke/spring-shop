@@ -17,5 +17,40 @@
         'a b c'
         'a b d';
     height: 550px;
-    background-color: black;
+    /* background-color: black; */
+}
+
+.detail-container .detail-context{
+    height: 100%;
+    grid-area: b;
+    overflow-y: scroll;
+    z-index: 1;
+}
+
+.detail-container .detail-review{
+    height: 100%;
+    z-index: 1;
+}
+
+.detail-container .review-wrap{
+    height: 100%;
+    padding: 10px 0;
+    
+}
+
+.detail-container .review-input>div{
+    display: flex;
+}
+
+.detail-container .review-input>div>input{
+    flex: 6;
+}
+
+.detail-container .review-input>div>button{
+    flex: 1;
+}
+
+.detail-container .purchase-btn{
+    margin-top: 
+    50px;
 }

@@ -15,4 +15,5 @@ export const Button = styled.button`
     outline: none;
     margin: 5px 0 ;
     background-color: ${(props) => props.color || "#4d4d4d"};
+    z-index: 1;
 `
