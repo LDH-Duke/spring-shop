@@ -7,7 +7,7 @@ position: relative;
 left: -21%;
 background-color: black;
 width: 21%;
-height: 100vh;
+height: 100%;
 z-index: 1;
 transition: .5s;
 ${(props) => props.active ?
