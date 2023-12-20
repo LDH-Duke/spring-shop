@@ -5,7 +5,7 @@ export const InputContainer = styled.div`
   flex-direction: ${(props) => props.direction || "row"};
   /* margin-bottom: 16px; */
   width: ${(props) => props.width || '100%'};
-  margin: ${(props)=> props.margin ||'30px 0'} ;
+  margin: ${(props) => props.margin || '30px 0'} ;
   z-index: 1;
 `
 export const InputLabel = styled.label`
