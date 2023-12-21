@@ -111,18 +111,23 @@ public class UserController {
         session.setAttribute("user",user);
         session.setMaxInactiveInterval(3600); // 1시간 유지
 
+        User value = (User) session.getAttribute("user");
+        System.out.println(value);
+
         //쿠키 생성
         Cookie cookie = new Cookie("user", session.getId());
         cookie.setMaxAge(60*60);
         cookie.setPath("/");
         httpServletResponse.addCookie(cookie);
 
+
+
         System.out.println("성공");
         return ResponseEntity.ok(ResDto.builder()
                 .code(200)
                 .statusCode(HttpStatus.OK)
                 .message("로그인 성공")
-                .data(user.getAccount())
+                .data(cookie)
                 .build()
         );
     }

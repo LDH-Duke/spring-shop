@@ -3,6 +3,7 @@ import { SignInPresenter } from './SignInPresenter.jsx'
 import axios from 'axios';
 import userApi from '../../../api/user/user.js';
 import { useNavigate } from 'react-router-dom';
+import { getCookie, setCookie } from '../../../api/cookies.js';
 
 
 const SignInContainer = () => {
@@ -43,6 +44,13 @@ const SignInContainer = () => {
             setErr(0)
             return 0;
         }
+
+        setCookie('user','user',{
+            path:result.data.path,
+            maxAge:result.data.maxAge,
+        })
+
+        
         return navigate("/shop")
         
 
