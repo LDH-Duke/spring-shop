@@ -53,11 +53,11 @@ export const List = (props) => {
                         return (
                             <ListItem
                                 onMouseMove={(e) => handleMouseEnter(e)}
-                                img={item.img}
-                                onClick={() => navigate(`/item/detail/${idx}`)}
+                                img={item.img_1}
+                                onClick={() => navigate(`/item/detail/${item.id}`)}
                                 onMouseLeave={(e) => { handleMouseLeave(e) }}
                             >
-                                <ItemLabel>{item.name}</ItemLabel>
+                                <ItemLabel>{item.name}</ItemLabel><br />
                                 <ItemLabel>{item.price}</ItemLabel>
                             </ListItem>
                         )

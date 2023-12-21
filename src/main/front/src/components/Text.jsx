@@ -13,14 +13,14 @@ border: 1px solid black;
 border-radius: 3px;
 padding: 10px;
 background-color: white;
-height: ${(props)=> props.height || 'auto'};
+height: ${(props) => props.height || 'auto'};
 overflow-y: scroll;
 `
 
 export const TextLabel = styled.label`
     font-weight: bold;
     font-size: ${(props) => props.size || '1.2rem'};
-    color: ${(props)=>props.color ||'white'};
+    color: ${(props) => props.color || 'white'};
     
 `
 
@@ -31,24 +31,29 @@ export const TextArea = styled.p`
 
 
 
-export const Text = ({data}) => {
+export const Text = ({ data }) => {
     return (// 이름, 설명, 디테일(원단 등), 가격
         <TextContainer>
             <TextWrap>
-                <TextArea>{data.title}</TextArea>
+                <TextArea>{data.name}</TextArea>
             </TextWrap>
             <TextWrap>
-                <TextArea>{data.explain}</TextArea>
+                <TextArea>{data.ex1}</TextArea>
             </TextWrap>
             <TextLabel>Details</TextLabel>
             <TextWrap>
                 <TextArea>
-                    {data.detail}
+                    {data.ex2}
+                </TextArea>
+            </TextWrap>
+            <TextWrap>
+                <TextArea>
+                    {data.ex3}
                 </TextArea>
             </TextWrap>
             <TextLabel>Price</TextLabel>
-            <TextWrap> 
-                
+            <TextWrap>
+
                 <TextArea>
                     {data.price}
                 </TextArea>

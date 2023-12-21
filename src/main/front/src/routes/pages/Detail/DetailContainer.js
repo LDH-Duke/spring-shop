@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { DetailPresenter } from './DetailPresenter'
 import c1 from '../../../imgs/c1.jpg'
+import { useParams } from 'react-router-dom'
+import { productAPI } from '../../../api/clothes/clothes'
 
 
 const DetailContainer = () => {
+    let params = useParams();
+    const [datas, setDatas] = useState([]);
+
     const data = {
         "img": c1,
         "title": "페이크 레더 패딩 점퍼",
@@ -18,31 +23,42 @@ const DetailContainer = () => {
             "review": "옷이 너무 멋있어요!"
         },
         {
-            "user":"user2",
+            "user": "user2",
             "date": "23-02-15",
-            "review":"옷이 너무 멋있어요!"
+            "review": "옷이 너무 멋있어요!"
         },
         {
-            "user":"user3",
+            "user": "user3",
             "date": "23-02-15",
-            "review":"옷이 너무 멋있어요!"
+            "review": "옷이 너무 멋있어요!"
         },
         {
-            "user":"user4",
+            "user": "user4",
             "date": "23-02-15",
-            "review":"옷이 너무 멋있어요!"
+            "review": "옷이 너무 멋있어요!"
         }
     ]
 
     const size = [
-        {value : "S", name:"S" },
-        {value : "M", name:"M" },
-        {value : "L", name:"L" }
+        { value: "S", name: "S" },
+        { value: "M", name: "M" },
+        { value: "L", name: "L" }
     ]
 
+    //렌더링. 시 리스트 데이터 
+
+    useEffect(() => {
+        async function axiosData() {
+            const result = await productAPI.ListOne(params);
+            console.log("동작함")
+            setDatas(result.data.data)
+        }
+        axiosData()
+    }, [])
+    // console.log(datas)
     return (
         <DetailPresenter
-            data={data}
+            data={datas}
             reviews={reviews}
             size={size}
         />

@@ -20,7 +20,7 @@ export const DetailPresenter = ({
                 </div>
                 <div className='detail-review'>
                     <div className='review-wrap'>
-                        <TextLabel>Review</TextLabel>
+                        <TextLabel>Comments</TextLabel>
                         <TextWrap height='50%'>
                             {
                                 reviews.map((review, idx) => {
@@ -48,7 +48,7 @@ export const DetailPresenter = ({
                 </div>
                 <div className='detail-purchase'>
                     <div className='purchase-option'>
-                        <SelectBox options={size}/>
+                        <SelectBox options={size} />
                     </div>
                     <div className='purchase-btn'>
                         <Button>장바구니</Button>

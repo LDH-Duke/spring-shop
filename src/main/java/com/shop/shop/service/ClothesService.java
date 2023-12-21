@@ -40,7 +40,6 @@ public class ClothesService {
     /**
      *  제품 삭제
      */
-
     public void deleteClothes(Integer id){
         clothesRepository.deleteById(id);
     }

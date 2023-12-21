@@ -19,8 +19,11 @@ public class ClothesController {
     @Autowired
     private ClothesService clothesService;
 
+    /**
+     * 제품 전체 조회 (GET)
+     */
     @GetMapping("/api/v1/clothes")
-    public ResponseEntity<ResDto> findClothes(){
+    public ResponseEntity<ResDto> findAllClothes(){
 
         List<Clothes> list = clothesService.getAllClothes();
 
@@ -31,12 +34,37 @@ public class ClothesController {
         return ResponseEntity.ok(ResDto.builder()
                 .code(200)
                 .statusCode(HttpStatus.OK)
-                .message("중복 없음")
+                .message("제품 전체 조회 완료")
                 .data(list)
                 .build()
         );
     }
 
+    /**
+     * 단일 제품 조회 (GET)
+     */
+    @GetMapping("/api/v1/detail")
+    public ResponseEntity<ResDto> findOneClothes(@RequestParam(name = "id") Integer id){
+
+        Clothes result = clothesService.getClothes(id);
+
+        System.out.println(result.getName());
+
+        return ResponseEntity.ok(ResDto.builder()
+                .code(200)
+                .statusCode(HttpStatus.OK)
+                .message("단일 제품 조회 완료")
+                .data(result)
+                .build()
+        );
+    }
+
+
+    /**
+     * 제품 추가
+     * @param clothes
+     * @return
+     */
     @PostMapping(value = "/api/v1/add_clothes", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResDto> createClothes(@RequestBody Clothes clothes){
 
@@ -52,6 +80,12 @@ public class ClothesController {
         );
     }
 
+    /**
+     * 제품 수정
+     * @param id
+     * @param clothes
+     * @return
+     */
     @PutMapping(value = "/api/v1/update_clothes",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResDto> updateClothed(@RequestParam(name = "id") Integer id, @RequestBody Clothes clothes ){
 
@@ -59,8 +93,7 @@ public class ClothesController {
         tempClothes.setName(clothes.getName());
         tempClothes.setPrice(clothes.getPrice());
         tempClothes.setAmount(clothes.getAmount());
-        tempClothes.setCategory(clothes.getCategory());
-        tempClothes.setState(clothes.getState());
+        tempClothes.setStatus(clothes.getStatus());
 
         Clothes result = clothesService.saveClothes(tempClothes);
 
@@ -73,6 +106,11 @@ public class ClothesController {
         );
     }
 
+    /**
+     * 제품 삭제
+     * @param id
+     * @return
+     */
     @DeleteMapping(value = "/api/v1/delete_clothes",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResDto> deleteClothes(@RequestParam(name = "id")Integer id){
         clothesService.deleteClothes(id);

@@ -19,7 +19,15 @@ public class User {
     private String name;
     private String phone;
     private String email;
-    private String birth;
+    private Boolean is_admin;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getAccount() {
         return account;
@@ -61,11 +69,11 @@ public class User {
         this.email = email;
     }
 
-    public String getBirth() {
-        return birth;
+    public Boolean getIs_admin() {
+        return is_admin;
     }
 
-    public void setBirth(String birth) {
-        this.birth = birth;
+    public void setIs_admin(Boolean is_admin) {
+        this.is_admin = is_admin;
     }
 }

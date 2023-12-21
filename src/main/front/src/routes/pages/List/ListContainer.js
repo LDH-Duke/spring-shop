@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ListPresenter } from './ListPresenter'
 import c1 from '../../../imgs/c1.jpg'
 import { useNavigate } from 'react-router-dom';
+import { productAPI } from '../../../api/clothes/clothes';
 
 const ListContainer = ({
     mouse // 마우스 움직임
@@ -9,6 +10,7 @@ const ListContainer = ({
 
     const navigate = useNavigate();
     const [active, setActive] = useState(0);
+    const [data, setData] = useState([])
 
     const datas = [
         { name: "title", img: c1, price: 10000 },
@@ -23,6 +25,17 @@ const ListContainer = ({
         { name: "title", img: c1, price: 10000 },
         { name: "title", img: c1, price: 10000 },
     ]
+
+    //렌더링. 시 리스트 데이터 
+
+    useEffect(() => {
+        async function axiosData() {
+            const result = await productAPI.ListAll();
+            console.log("동작함")
+            setData(result.data)
+        }
+        axiosData()
+    }, [])
 
 
     //card 움직임
@@ -41,7 +54,7 @@ const ListContainer = ({
 
 
     return <ListPresenter
-        datas={datas}
+        datas={data}
         navigate={navigate}
         active={active}
         setActive={setActive}
