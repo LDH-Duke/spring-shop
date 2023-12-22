@@ -9,7 +9,9 @@ import { SelectBox } from '../../../components/SelectBox'
 export const DetailPresenter = ({
     data,
     reviews,
-    size
+    size,
+
+    handleReviewChange,
 }) => {
     return (
         <div className='detail-container'>
@@ -40,7 +42,7 @@ export const DetailPresenter = ({
                         </TextWrap>
                         <div className='review-input'>
                             <InputContainer margin='15px 0'>
-                                <InputField placeholder='댓글을 입력하세요.' />
+                                <InputField placeholder='댓글을 입력하세요.' onChange={(e) => handleReviewChange(e.target.value)} />
                                 <Button>V</Button>
                             </InputContainer>
                         </div>

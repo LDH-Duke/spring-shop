@@ -1,16 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SignInPresenter } from './SignInPresenter.jsx'
 import axios from 'axios';
 import userApi from '../../../api/user/user.js';
 import { useNavigate } from 'react-router-dom';
-import { getCookie, setCookie } from '../../../api/cookies.js';
+import { useCookies } from 'react-cookie';
 
 
 const SignInContainer = () => {
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
     const [err, setErr] = useState(1);
+    const [cookies, setCookie, removeCookie] = useCookies(['id'])
 
+
+    useEffect(() => {
+        if (cookies.user != null) {
+            window.confirm("로그인 되어있습니다.")
+            navigate("/shop")
+        }
+    }, [])
 
     const navigate = useNavigate();
 
@@ -45,16 +53,16 @@ const SignInContainer = () => {
             return 0;
         }
 
-        setCookie('user','user',{
-            path:result.data.path,
-            maxAge:result.data.maxAge,
+        setCookie('user', 'user', {
+            path: result.data.path,
+            maxAge: result.data.maxAge,
         })
 
-        
-        return navigate("/shop")
-        
 
-        
+        return navigate("/shop")
+
+
+
 
     }
 

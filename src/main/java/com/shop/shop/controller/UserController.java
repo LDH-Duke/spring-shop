@@ -117,7 +117,7 @@ public class UserController {
         //쿠키 생성
         Cookie cookie = new Cookie("user", session.getId());
         cookie.setMaxAge(60*60);
-        cookie.setPath("/");
+        cookie.setPath("/shop");
         httpServletResponse.addCookie(cookie);
 
 

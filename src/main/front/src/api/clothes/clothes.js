@@ -29,5 +29,19 @@ export const productAPI = {
         } catch (error) {
             console.log(error)
         }
+    },
+
+    /**
+     * 제품 리뷰 등록(POST)
+     */
+    AddReview: async (data) => {
+        try {
+            return await axios.post(
+                'http://localhost:8080/ap1/v1/add_review',
+                data,
+            )
+        } catch (error) {
+
+        }
     }
 }
