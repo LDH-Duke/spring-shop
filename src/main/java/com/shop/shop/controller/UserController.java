@@ -108,14 +108,15 @@ public class UserController {
         httpServletRequest.getSession().invalidate();
         HttpSession session = httpServletRequest.getSession(true);
 
-        session.setAttribute("user",user);
+        session.setAttribute("user",user.getAccount());
         session.setMaxInactiveInterval(3600); // 1시간 유지
 
-        User value = (User) session.getAttribute("user");
+        String value = (String) session.getAttribute("user");
         System.out.println(value);
 
         //쿠키 생성
         Cookie cookie = new Cookie("user", session.getId());
+        System.out.println(session.getId());
         cookie.setMaxAge(60*60);
         cookie.setPath("/shop");
         httpServletResponse.addCookie(cookie);

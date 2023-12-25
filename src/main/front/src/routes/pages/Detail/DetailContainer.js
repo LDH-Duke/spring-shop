@@ -3,21 +3,25 @@ import { DetailPresenter } from './DetailPresenter'
 import c1 from '../../../imgs/c1.jpg'
 import { useParams } from 'react-router-dom'
 import { productAPI } from '../../../api/clothes/clothes'
+import { reviewAPI } from '../../../api/review/review'
 
 
-const DetailContainer = () => {
+const DetailContainer = ({
+    cookies,
+}) => {
     let params = useParams();
     const [datas, setDatas] = useState([]);
     const [review, setReview] = useState('');
-
+    const cookiess = decodeURIComponent(document.cookie)
+    const a = JSON.parse(cookiess.substring(cookiess.indexOf("=")+1))
     //렌더링. 시 리스트 데이터 
 
     useEffect(() => {
         async function axiosData() {
             const result = await productAPI.ListOne(params);
-            console.log("동작함")
             setDatas(result.data.data)
         }
+        console.log(a)
         axiosData()
     }, [])
 
@@ -52,11 +56,27 @@ const DetailContainer = () => {
 
     const handleReviewChange = (review) => {
         setReview(review)
-        console.log(review)
+
     }
 
+    const handleAddReview = async() =>{
+        const data = {
+            date : review,
+            clothes_id : params.id,
+        }
+        const headers = {
+            'Content-Type': 'application/json',
+            ...cookies
+        }
+        console.log(headers)
 
-    // console.log(datas)
+        
+
+        const result = await reviewAPI.AddReview(data, headers);
+
+        console.log(result)
+
+    }
     return (
         <DetailPresenter
             data={datas}
@@ -64,6 +84,7 @@ const DetailContainer = () => {
             size={size}
 
             handleReviewChange={handleReviewChange}
+            handleAddReview={handleAddReview}
         />
     )
 }

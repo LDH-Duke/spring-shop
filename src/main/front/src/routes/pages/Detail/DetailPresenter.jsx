@@ -12,6 +12,7 @@ export const DetailPresenter = ({
     size,
 
     handleReviewChange,
+    handleAddReview,
 }) => {
     return (
         <div className='detail-container'>
@@ -43,7 +44,7 @@ export const DetailPresenter = ({
                         <div className='review-input'>
                             <InputContainer margin='15px 0'>
                                 <InputField placeholder='댓글을 입력하세요.' onChange={(e) => handleReviewChange(e.target.value)} />
-                                <Button>V</Button>
+                                <Button onClick={()=>{handleAddReview()}}>V</Button>
                             </InputContainer>
                         </div>
                     </div>

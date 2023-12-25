@@ -6,11 +6,15 @@ import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 
-const SignInContainer = () => {
+const SignInContainer = ({
+    setCookie, 
+    cookies
+}) => {
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
     const [err, setErr] = useState(1);
-    const [cookies, setCookie, removeCookie] = useCookies(['id'])
+    
+    
 
 
     useEffect(() => {
@@ -18,6 +22,7 @@ const SignInContainer = () => {
             window.confirm("로그인 되어있습니다.")
             navigate("/shop")
         }
+
     }, [])
 
     const navigate = useNavigate();
@@ -40,7 +45,7 @@ const SignInContainer = () => {
         }
         const result = await userApi.Login(data, headers);
 
-        console.log(result)
+        console.log(result.data.value)
 
         if (result.code === 400) {
             console.log("비밀번호 에러")
@@ -53,11 +58,10 @@ const SignInContainer = () => {
             return 0;
         }
 
-        setCookie('user', 'user', {
+        setCookie('user', result.data, {
             path: result.data.path,
             maxAge: result.data.maxAge,
         })
-
 
         return navigate("/shop")
 
