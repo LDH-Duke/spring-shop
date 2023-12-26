@@ -33,16 +33,15 @@ public class ReviewController {
         System.out.println(review.getClothes_id());
         System.out.println(review.getDate());
 
-        System.out.println(headers.getFirst("user"));
 
-        Cookie[] cookies = request.getCookies();
-        System.out.println(cookies);
-        if(cookies != null){
-            System.out.println("동작");
-            for (Cookie cookie : cookies) {
-                System.out.println(cookie.getName());
-            }
-        }
+        System.out.println(headers);
+
+//        Cookie[] cookies = request.getCookies();
+//        if(cookies != null){
+//            for (Cookie cookie : cookies) {
+//                System.out.println(cookie.getName());
+//            }
+//        }
 
 //        Review result = reviewService.addReview(review);
 

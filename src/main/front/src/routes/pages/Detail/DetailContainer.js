@@ -12,8 +12,8 @@ const DetailContainer = ({
     let params = useParams();
     const [datas, setDatas] = useState([]);
     const [review, setReview] = useState('');
-    const cookiess = decodeURIComponent(document.cookie)
-    const a = JSON.parse(cookiess.substring(cookiess.indexOf("=")+1))
+
+
     //렌더링. 시 리스트 데이터 
 
     useEffect(() => {
@@ -21,7 +21,6 @@ const DetailContainer = ({
             const result = await productAPI.ListOne(params);
             setDatas(result.data.data)
         }
-        console.log(a)
         axiosData()
     }, [])
 
@@ -59,18 +58,15 @@ const DetailContainer = ({
 
     }
 
-    const handleAddReview = async() =>{
+    const handleAddReview = async () => {
         const data = {
-            date : review,
-            clothes_id : params.id,
+            date: review,
+            clothes_id: params.id,
         }
         const headers = {
             'Content-Type': 'application/json',
-            ...cookies
+            withCredentials: true,
         }
-        console.log(headers)
-
-        
 
         const result = await reviewAPI.AddReview(data, headers);
 

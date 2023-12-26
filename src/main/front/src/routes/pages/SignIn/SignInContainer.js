@@ -7,14 +7,14 @@ import { useCookies } from 'react-cookie';
 
 
 const SignInContainer = ({
-    setCookie, 
+    setCookie,
     cookies
 }) => {
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
     const [err, setErr] = useState(1);
-    
-    
+
+    const cookie = JSON.parse(decodeURIComponent(document.cookie).substring(decodeURIComponent(document.cookie).indexOf("=") + 1))
 
 
     useEffect(() => {
@@ -22,7 +22,6 @@ const SignInContainer = ({
             window.confirm("로그인 되어있습니다.")
             navigate("/shop")
         }
-
     }, [])
 
     const navigate = useNavigate();
@@ -58,10 +57,11 @@ const SignInContainer = ({
             return 0;
         }
 
-        setCookie('user', result.data, {
+        setCookie('user', cookie, {
             path: result.data.path,
             maxAge: result.data.maxAge,
         })
+
 
         return navigate("/shop")
 
