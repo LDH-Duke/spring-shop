@@ -52,7 +52,6 @@ const ListContainer = ({
         e.target.style = 'transform : null'
     }
 
-
     return <ListPresenter
         datas={data}
         navigate={navigate}

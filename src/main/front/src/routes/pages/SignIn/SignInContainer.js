@@ -14,15 +14,16 @@ const SignInContainer = ({
     const [pw, setPw] = useState("");
     const [err, setErr] = useState(1);
 
-    const cookie = JSON.parse(decodeURIComponent(document.cookie).substring(decodeURIComponent(document.cookie).indexOf("=") + 1))
-
-
     useEffect(() => {
-        if (cookies.user != null) {
+        if (document.cookie != '') {
             window.confirm("로그인 되어있습니다.")
             navigate("/shop")
         }
     }, [])
+    // if (result.data.value != null) {
+    //     console.log('active');
+    //     cookie = JSON.parse(decodeURIComponent(document.cookie).substring(decodeURIComponent(document.cookie).indexOf("=") + 1))
+    // }
 
     const navigate = useNavigate();
 
@@ -35,6 +36,7 @@ const SignInContainer = ({
     }
 
     const handleSignIn = async () => {
+        const cookie = '';
         const headers = {
             'Content-Type': 'application/json',
         }
@@ -43,6 +45,8 @@ const SignInContainer = ({
             'pw': pw
         }
         const result = await userApi.Login(data, headers);
+
+
 
         console.log(result.data.value)
 
@@ -56,6 +60,7 @@ const SignInContainer = ({
             setErr(0)
             return 0;
         }
+
 
         setCookie('user', cookie, {
             path: result.data.path,
