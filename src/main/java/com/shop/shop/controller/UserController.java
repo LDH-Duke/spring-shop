@@ -21,7 +21,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+//@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")-
 @RestController
 public class UserController {
 
@@ -108,17 +108,21 @@ public class UserController {
         httpServletRequest.getSession().invalidate();
         HttpSession session = httpServletRequest.getSession(true);
 
-        session.setAttribute("user",user.getAccount());
+        session.setAttribute(session.getId(),user.getAccount());
         session.setMaxInactiveInterval(3600); // 1시간 유지
 
-        String value = (String) session.getAttribute("user");
+        String value = (String) session.getAttribute(session.getId());
+        System.out.println(session.getId());
         System.out.println(value);
+
+        System.out.println(session.getId());
 
         //쿠키 생성
         Cookie cookie = new Cookie("user", session.getId());
-        System.out.println(session.getId());
+        System.out.println("쿠키" + cookie);
+        System.out.println("쿠키 : "+cookie.getAttribute(session.getId()));
         cookie.setMaxAge(60*60);
-        cookie.setPath("/shop");
+        cookie.setPath("/");
         httpServletResponse.addCookie(cookie);
 
 

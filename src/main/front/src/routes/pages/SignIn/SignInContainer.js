@@ -13,6 +13,8 @@ const SignInContainer = ({
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
     const [err, setErr] = useState(1);
+    let cookie = {}
+
 
     useEffect(() => {
         if (document.cookie != '') {
@@ -20,10 +22,6 @@ const SignInContainer = ({
             navigate("/shop")
         }
     }, [])
-    // if (result.data.value != null) {
-    //     console.log('active');
-    //     cookie = JSON.parse(decodeURIComponent(document.cookie).substring(decodeURIComponent(document.cookie).indexOf("=") + 1))
-    // }
 
     const navigate = useNavigate();
 
@@ -36,7 +34,6 @@ const SignInContainer = ({
     }
 
     const handleSignIn = async () => {
-        const cookie = '';
         const headers = {
             'Content-Type': 'application/json',
         }
@@ -46,9 +43,6 @@ const SignInContainer = ({
         }
         const result = await userApi.Login(data, headers);
 
-
-
-        console.log(result.data.value)
 
         if (result.code === 400) {
             console.log("비밀번호 에러")
@@ -60,18 +54,20 @@ const SignInContainer = ({
             setErr(0)
             return 0;
         }
+        if (result.code == 200) {
+            // cookie = JSON.parse(decodeURIComponent(document.cookie).substring(decodeURIComponent(document.cookie).indexOf("=") + 1))
+            cookie = document.cookie;
+            console.log(cookie);
+        }
+        console.log(result.data.value);
 
-
-        setCookie('user', cookie, {
+        setCookie('user', result.data.value, {
             path: result.data.path,
             maxAge: result.data.maxAge,
         })
 
 
-        return navigate("/shop")
-
-
-
+        return navigate("/shop/list")
 
     }
 

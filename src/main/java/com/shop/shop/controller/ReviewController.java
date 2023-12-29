@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+
 @RestController
 public class ReviewController {
 
@@ -27,21 +27,24 @@ public class ReviewController {
      * 리뷰 등록(POST)
      */
     @PostMapping(value = "api/v1/add_review", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResDto> addReview(@RequestBody Review review, @RequestHeader()HttpHeaders headers, HttpServletRequest request){
+    public ResponseEntity<ResDto> addReview(@RequestBody Review review, HttpSession session, HttpServletRequest httpServletRequest){
 
-        System.out.println(review);
-        System.out.println(review.getClothes_id());
-        System.out.println(review.getDate());
+        String sessionId = null;
 
+        Cookie[] cookies = httpServletRequest.getCookies();
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("user")){
+                sessionId = cookie.getValue();
+            }
+            System.out.println(cookie);
+        }
 
-        System.out.println(headers);
-
-//        Cookie[] cookies = request.getCookies();
-//        if(cookies != null){
-//            for (Cookie cookie : cookies) {
-//                System.out.println(cookie.getName());
-//            }
-//        }
+//        System.out.println(httpServletRequest.getSession().getId());
+//
+        if (sessionId != null ){
+            String value = (String) session.getAttribute(sessionId);
+            System.out.println(value);
+        }
 
 //        Review result = reviewService.addReview(review);
 

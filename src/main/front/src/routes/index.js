@@ -20,9 +20,9 @@ const Router = () => {
         <div onMouseMove={(e) => moveMouse(e)}>
             <MousePointer x={xy.x} y={xy.y} />
             <Routes>
-                <Route path='/shop/list' element={<List mouse={xy} />} />
-                <Route path='/shop/item/detail/:id' element={<Detail cookies={cookies}/>} />
-                <Route path='/shop/signin' element={<SignIn setCookie={setCookie} cookies={cookies}/>} />
+                <Route path='/shop/list' element={<List mouse={xy} cookies={cookies} />} />
+                <Route path='/shop/item/detail/:id' element={<Detail cookies={cookies} />} />
+                <Route path='/shop/signin' element={<SignIn setCookie={setCookie} cookies={cookies} />} />
                 <Route path='/shop/signup' element={<SignUp />} />
             </Routes>
         </div>

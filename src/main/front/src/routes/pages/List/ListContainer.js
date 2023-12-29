@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { productAPI } from '../../../api/clothes/clothes';
 
 const ListContainer = ({
-    mouse // 마우스 움직임
+    mouse, // 마우스 움직임
+    cookies
 }) => {
 
     const navigate = useNavigate();
@@ -31,9 +32,9 @@ const ListContainer = ({
     useEffect(() => {
         async function axiosData() {
             const result = await productAPI.ListAll();
-            console.log("동작함")
             setData(result.data)
         }
+        console.log(cookies);
         axiosData()
     }, [])
 

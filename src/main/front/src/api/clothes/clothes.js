@@ -9,7 +9,6 @@ export const productAPI = {
             return await axios.get(
                 'http://localhost:8080/api/v1/clothes',
             ).then((res) => {
-                console.log(res.data);
                 return (res.data)
             })
         } catch (error) {

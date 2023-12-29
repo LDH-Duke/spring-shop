@@ -9,7 +9,10 @@ export const reviewAPI = {
             return await axios.post(
                 'http://localhost:8080/api/v1/add_review',
                 data,
-                {headers}
+                {
+                    withCredentials: true,
+                    headers
+                }
             )
         } catch (error) {
 

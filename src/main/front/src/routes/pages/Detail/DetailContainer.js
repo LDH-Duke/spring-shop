@@ -21,6 +21,7 @@ const DetailContainer = ({
             const result = await productAPI.ListOne(params);
             setDatas(result.data.data)
         }
+
         axiosData()
     }, [])
 

@@ -27,9 +27,9 @@ public class ClothesController {
 
         List<Clothes> list = clothesService.getAllClothes();
 
-        for (Clothes clothes : list) {
-            System.out.println(clothes.getName());
-        }
+//        for (Clothes clothes : list) {
+//            System.out.println(clothes.getName());
+//        }
 
         return ResponseEntity.ok(ResDto.builder()
                 .code(200)

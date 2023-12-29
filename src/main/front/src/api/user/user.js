@@ -12,7 +12,6 @@ const userApi = {
                 data,
                 headers,
             )
-
             return result.data
         } catch (e) {
             console.log(e)
