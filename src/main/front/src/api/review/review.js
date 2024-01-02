@@ -10,7 +10,7 @@ export const reviewAPI = {
                 'http://localhost:8080/api/v1/add_review',
                 data,
                 {
-                    withCredentials: true,
+                    // withCredentials: true,
                     headers
                 }
             )

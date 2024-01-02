@@ -66,7 +66,7 @@ const DetailContainer = ({
         }
         const headers = {
             'Content-Type': 'application/json',
-            withCredentials: true,
+            // withCredentials: true,
         }
 
         const result = await reviewAPI.AddReview(data, headers);

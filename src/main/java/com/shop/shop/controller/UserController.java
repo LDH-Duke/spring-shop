@@ -102,28 +102,30 @@ public class UserController {
                     .build()
             );
         }
-
+        System.out.println("!"+httpServletRequest.getSession(false));
         //로그인 성공
         //세션이 있으면 있는 세션 반환, 없으면 신규 세션을 생성
-        httpServletRequest.getSession().invalidate();
+//        httpServletRequest.getSession().invalidate();
         HttpSession session = httpServletRequest.getSession(true);
 
-        session.setAttribute(session.getId(),user.getAccount());
+        session.setAttribute("user",user);
         session.setMaxInactiveInterval(3600); // 1시간 유지
 
-        String value = (String) session.getAttribute(session.getId());
-        System.out.println(session.getId());
-        System.out.println(value);
+        User value = (User) session.getAttribute("user");
+        System.out.println("login : SessionId ->"+session.getId());
+        System.out.println("login : sessionValue ->"+value);
 
         System.out.println(session.getId());
+        System.out.println(httpServletRequest.getSession(false));
 
         //쿠키 생성
         Cookie cookie = new Cookie("user", session.getId());
-        System.out.println("쿠키" + cookie);
-        System.out.println("쿠키 : "+cookie.getAttribute(session.getId()));
+        System.out.println("login : 쿠키 ->" + cookie);
+        System.out.println("login : 쿠키 Value ->"+cookie.getValue());
         cookie.setMaxAge(60*60);
         cookie.setPath("/");
         httpServletResponse.addCookie(cookie);
+        System.out.println(cookie);
 
 
 

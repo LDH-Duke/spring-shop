@@ -7,11 +7,17 @@ const userApi = {
      */
     Login: async (data, headers) => {
         try {
-            const result = await axios.post(
-                "http://localhost:8080/api/v1/signin",
-                data,
-                headers,
-            )
+            // const result = await axios.post(
+            //     "http://localhost:8080/api/v1/signin",
+            //     data,
+            //     headers,
+            // )
+            const result = await axios({
+                url: "http://localhost:8080/api/v1/signin",
+                data: data,
+                method: "post",
+                headers: headers,
+            })
             return result.data
         } catch (e) {
             console.log(e)

@@ -61,7 +61,7 @@ const SignInContainer = ({
         }
         console.log(result.data.value);
 
-        setCookie('user', result.data.value, {
+        setCookie('1', result.data.value, {
             path: result.data.path,
             maxAge: result.data.maxAge,
         })
